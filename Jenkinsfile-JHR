@@ -1,0 +1,45 @@
+pipeline {
+
+	agent any
+
+	parameters {
+	string(name: 'TOMCAT_DEV_IP', defaultValue:'http://localhost:8090', description:'Staging Server : 8080')
+	string(name: 'TOMCAT_PROD_IP', defaultValue:'http://localhost:9090',description:'Production Server : 9090')
+	}
+
+	triggers {
+	pollSCM('* * * * *') // Polling Source Control
+	}
+
+	stages {
+		stage('Build') {
+			steps{
+			bat 'mvn clean package -DskipTests'
+			}
+			post {
+				success {
+				echo "Now Archiving ...."
+				archiveArtifacts artifacts: '**/target/*.jar'
+				}
+			}
+		}
+		
+		stage('Deployments') {
+			
+				stage ('Deploy to localhost port 9595') {
+					steps {
+					sh label: '', script: 'java -jar 02_Hello-Web-1.jar --port=9595'
+					}
+						post {
+						success {
+						echo "Now Archiving ...."
+					
+						}
+					}
+				}				
+
+		}
+
+	}
+
+}
