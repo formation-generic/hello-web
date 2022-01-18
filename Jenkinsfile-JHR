@@ -25,19 +25,19 @@ pipeline {
 		}
 		
 		stage('Deployments') {
-			
+			parallel {
 				stage ('Deploy to localhost port 9595') {
 					steps {
 					sh label: '', script: 'java -jar 02_Hello-Web-1.jar --port=9595'
 					}
 						post {
 						success {
-						echo "Now Archiving ...."
+						echo "Deployed ...."
 					
 						}
 					}
 				}				
-
+			}
 		}
 
 	}
