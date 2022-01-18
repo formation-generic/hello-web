@@ -10,3 +10,8 @@ Packaging Spring Boot application as an executable jar
 	mvn clean package
 	
 	java -jar 02_Hello-Web-1.jar
+	
+	Port par défut défini dans application.properties: 9594
+	
+	Pour changer le port d'éxecution à l'arrivée.
+	java -jar Hello-Web-1.jar --server.port=9595
