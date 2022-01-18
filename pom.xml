@@ -5,7 +5,7 @@
 
 	<groupId>com.formation.boot</groupId>
 	<artifactId>Hello-Web</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1</version>
 	<packaging>jar</packaging>
 
 	<name>02_Hello-Web</name>
